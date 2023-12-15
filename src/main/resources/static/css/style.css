@@ -1,0 +1,15 @@
+.my-style {
+	background: #B06161;
+}
+
+.my-heading {
+	color: #B06161;
+}
+
+.banner{
+    width: 100%;
+    height: 93vh;
+    background:linear-gradient(rgba(0,0,0,.9),rgba(0,0,0,.9)), url(../img/userback.jpg);
+    color: white;
+    background-size: cover;
+}
