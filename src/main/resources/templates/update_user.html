@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+</head>
+
+<body>
+	<section>
+		<div class="container p-3">
+			<div class="row">
+				<div class="col-md-6 offset-md-3">
+					<div class="card">
+						<div class="card-header text-center fs-4">Update User</div>
+
+
+						<th:block th:if="${session.msg}">
+							<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+							<th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+
+						</th:block>
+
+						<div class="card-body">
+							<form th:action="@{/user/update-user}" th:object="${user}" method="post">
+
+
+								<input type="hidden" th:value="${user.id}" name="id">
+								<div class="mb-3">
+									<label>Enter Full Name</label> <input th:value="${user.name}" type="text"
+										name="name" class="form-control">
+								</div>
+								<div class="mb-3">
+									<label>Enter Email</label> <input th:value="${user.email}" type="text" name="email"
+										class="form-control">
+								</div>
+
+								<div class="mb-3">
+									<label>Enter Address</label> <input th:value="${user.address}" type="text"
+										name="address" class="form-control">
+								</div>
+
+								<div class="mb-3">
+									<label>Enter City</label> <input th:value="${user.city}" type="text" name="city"
+										class="form-control">
+								</div>
+
+								<div class="mb-3">
+									<label>Enter Address Pin</label> <input th:value="${user.pin}" type="number"
+										name="pin" class="form-control">
+								</div>
+
+								<div class="mb-3">
+									<label>Enter Electricity Customer Id</label> <input
+										th:value="${user.elctricityCustomerID}" type="text" name="elctricityCustomerID"
+										class="form-control">
+								</div>
+
+								<div class="mb-3">
+									<label>Enter Mobile Number</label> <input th:value="${user.mobile}" type="number"
+										name="mobile" class="form-control">
+								</div>
+
+								 <input type="password" id="password" th:field="*{password}" readonly style="display:none;"/>
+
+
+								<button class="btn btn-primary col-md-12 my-style">Register</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+
+
+	</section>
+</body>
+
+</html>

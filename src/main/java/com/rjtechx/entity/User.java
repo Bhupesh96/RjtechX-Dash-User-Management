@@ -20,6 +20,13 @@ public class User {
 	private String mobile;
 	private String elctricityCustomerID;
 	private String city;
+	private boolean status;
+	public boolean isStatus() {
+		return status;
+	}
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 	public int getId() {
 		return id;
 	}
@@ -84,7 +91,7 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + ", name=" + name
 				+ ", address=" + address + ", pin=" + pin + ", mobile=" + mobile + ", elctricityCustomerID="
-				+ elctricityCustomerID + ", city=" + city + "]";
+				+ elctricityCustomerID + ", city=" + city + ", status=" + status + "]";
 	}
 	
 	

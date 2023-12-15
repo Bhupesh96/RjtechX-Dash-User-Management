@@ -28,6 +28,7 @@ public class UserServiceImpl implements UserService {
 		String password = passwordEncoder.encode(user.getPassword());
 		user.setPassword(password);
 		user.setRole("ROLE_USER");
+		user.setStatus(false);
 		User newuser = repo.save(user);
 
 		return newuser;
@@ -47,5 +48,29 @@ public class UserServiceImpl implements UserService {
 		
 		return repo.findAll();
 	}
+
+	@Override
+	public void updateUser(int id, User user) {
+		
+		User user2 = getExistingUser(id);
+		user2.setAddress(user.getAddress());
+		user2.setCity(user.getCity());
+		user2.setElctricityCustomerID(user.getElctricityCustomerID());
+		user2.setEmail(user.getEmail());
+		user2.setMobile(user.getMobile());
+		user2.setName(user.getName());
+		user2.setPin(user2.getPin());
+		user2.setRole("ROLE_USER");
+		user2.setStatus(false);
+		repo.save(user2);
+		
+		
+	}
+
+	@Override
+	public User getExistingUser(int id) {
+		return repo.findById(id).orElse(null);
+	}
+
 
 }

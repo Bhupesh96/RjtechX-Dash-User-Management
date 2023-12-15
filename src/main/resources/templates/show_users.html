@@ -14,6 +14,11 @@
 				<div class="col-md-12 offset-md-0">
 					<div class="card">
 						<div class="card-header text-center fs-4">Users</div>
+						<th:block th:if="${session.msg}">
+							<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+							<th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
+
+						</th:block>
 						<div class="card-body">
 							<table class="table">
 								<thead>
@@ -30,11 +35,28 @@
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<th scope="row">1</th>
-										<td>Mark</td>
-										<td>Otto</td>
-										<td>@mdo</td>
+									<tr th:each="c : ${user}">
+										<th scope="row" th:text="${'RJTXD2023'+ c.id}">1</th>
+										<td th:text="${c.name}">Mark</td>
+										<td th:text="${c.email}">Otto</td>
+										<td th:text="${c.address}">@mdo</td>
+										<td th:text="${c.pin}">@mdo</td>
+										<td th:text="${c.city}">@mdo</td>
+										<td th:text="${c.mobile}">@mdo</td>
+										<td th:text="${c.elctricityCustomerID}">@mdo</td>
+										<td>
+
+											
+											
+											
+											<form th:action="@{'/user/update-user/'+${c.id}}" method="post">
+												<button class="btn btn-success btn-sm">Update</button>
+											</form>
+											<a th:onclick="|deleteUser(${c.id})|" href="#"
+												class="btn btn-danger btn-sm">Delete</a>
+
+											<button class="btn btn-warning btn-sm">Suspend</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>

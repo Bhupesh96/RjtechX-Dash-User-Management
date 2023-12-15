@@ -34,6 +34,11 @@ public class HomeController {
 		}
 	}
 	
+	@GetMapping("/logout")
+	public String logout() {
+		return "redirect:/logout";
+	}
+	
 	@GetMapping("/show-users")
 	public String showUsers(Model m) {
 		return "show_users";
