@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 		String password = passwordEncoder.encode(user.getPassword());
 		user.setPassword(password);
 		user.setRole("ROLE_USER");
-		user.setStatus(false);
+		user.setStatus(true);
 		User newuser = repo.save(user);
 
 		return newuser;
@@ -60,8 +60,8 @@ public class UserServiceImpl implements UserService {
 		user2.setMobile(user.getMobile());
 		user2.setName(user.getName());
 		user2.setPin(user2.getPin());
-		user2.setRole("ROLE_USER");
-		user2.setStatus(false);
+		user2.setRole(user.getRole());
+		user2.setStatus(user.isStatus());
 		repo.save(user2);
 		
 		

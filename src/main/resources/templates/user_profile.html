@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Home</title>
+</head>
+
+<body>
+	<section class="bg-light">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 mb-4 mb-sm-5">
+					<div class="card card-style1 border-0">
+						<div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+							<div class="row align-items-center">
+								<div class="col-lg-6 mb-4 mb-lg-0">
+									<img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="...">
+								</div>
+								<div class="col-lg-6 px-xl-10">
+									<div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+										<h3 class="h2 text-white mb-0" th:text="${user.name}"></h3>
+										<span class="text-primary" th:text="${user.role}"></span>
+									</div>
+									<ul class="list-unstyled mb-1-9">
+										<li class="mb-2 mb-xl-3 display-28"><span
+												class="display-26 text-secondary me-2 font-weight-600">Role:</span>
+											<span th:text="${user.role}"><span />
+										</li>
+										<li class="mb-2 mb-xl-3 display-28"><span
+												class="display-26 text-secondary me-2 font-weight-600">Address:</span>
+											<span th:text="${user.address}"><span />
+										</li>
+										<li class="mb-2 mb-xl-3 display-28"><span
+												class="display-26 text-secondary me-2 font-weight-600">Pin:</span>
+											<span th:text="${user.pin}"><span />
+										</li>
+										<li class="mb-2 mb-xl-3 display-28"><span
+												class="display-26 text-secondary me-2 font-weight-600">City:</span>
+											<span th:text="${user.city}"><span />
+										</li>
+										<li class="mb-2 mb-xl-3 display-28"><span
+												class="display-26 text-secondary me-2 font-weight-600">Email:</span>
+											<span th:text="${user.email}"><span />
+										</li>
+										<li class="mb-2 mb-xl-3 display-28"><span
+												class="display-26 text-secondary me-2 font-weight-600">Mobile:</span>
+											<span th:text="${user.mobile}"><span />
+										</li>
+										<li class="mb-2 mb-xl-3 display-28"><span
+												class="display-26 text-secondary me-2 font-weight-600">ElectricityID:</span>
+											<span th:text="${user.elctricityCustomerID}"><span />
+										</li>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	</section>
+</body>
+
+</html>

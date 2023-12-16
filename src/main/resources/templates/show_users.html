@@ -31,6 +31,8 @@
 										<th scope="col">City</th>
 										<th scope="col">Mobile</th>
 										<th scope="col">Electricity CID</th>
+										<th scope="col">Role</th>
+										<th scope="col">Status</th>
 										<th scope="col">Action</th>
 									</tr>
 								</thead>
@@ -44,18 +46,19 @@
 										<td th:text="${c.city}">@mdo</td>
 										<td th:text="${c.mobile}">@mdo</td>
 										<td th:text="${c.elctricityCustomerID}">@mdo</td>
+										<td th:text="${c.role}">@mdo</td>
+										<td th:text="${c.status}">@mdo</td>
 										<td>
 
-											
-											
-											
-											<form th:action="@{'/user/update-user/'+${c.id}}" method="post">
-												<button class="btn btn-success btn-sm">Update</button>
+
+
+
+											<form th:action="@{'/admin/update-user/'+${c.id}}" method="post">
+												<button class="btn btn-success btn-sm my-button">Update</button>
 											</form>
 											<a th:onclick="|deleteUser(${c.id})|" href="#"
-												class="btn btn-danger btn-sm">Delete</a>
+												class="btn btn-danger btn-sm my-button">Delete</a>
 
-											<button class="btn btn-warning btn-sm">Suspend</button>
 										</td>
 									</tr>
 								</tbody>
@@ -67,9 +70,6 @@
 
 		</div>
 	</section>
-
-
-
 </body>
 
 </html>

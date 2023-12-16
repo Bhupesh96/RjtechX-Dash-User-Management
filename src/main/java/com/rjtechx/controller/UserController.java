@@ -24,53 +24,20 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 @RequestMapping("/user")
 public class UserController {
-
+	
 	@Autowired
 	private UserRepo repo;
 
-	@Autowired
-	private UserService userService;
-
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
-
-	@GetMapping("/show-users")
-	public String showUsers(Model model) {
-		List<User> user = repo.findAll();
+	@GetMapping("/view-profile")
+	public String userProfile(Principal principal, Model model) {
+		User user = repo.findByEmail(principal.getName());
 		model.addAttribute("user", user);
-		return "show_users";
-
+		return "user_profile";
 	}
-
-	@GetMapping("/delete/{id}")
-	public String deleteUser(@PathVariable("id") Integer id, Model model, HttpSession httpSession) {
-		Optional<User> userOptional = repo.findById(id);
-		User user = userOptional.get();
-		repo.delete(user);
-		httpSession.setAttribute("msg", "User Deleted!!");
-		return "redirect:/user/show-users";
-	}
-
-	@PostMapping("/update-user/{id}")
-	public String updateUser(@PathVariable("id") Integer id, Model model) {
-		Optional<User> userOptional = repo.findById(id);
-		System.out.println(userOptional);
-		User user = userOptional.get();
-		model.addAttribute("user", user);
-		return "update_user";
-
-	}
-
-	@PostMapping("/update-user")
-	public String saveUpdatedUser(@ModelAttribute User user, HttpSession session, Principal p) {
-		
-		userService.updateUser(user.getId(), user);
-		
-		session.setAttribute("msg", "User Updated!!");
-
-		System.out.println(user);
-
-		return "redirect:/user/show-users";
+	
+	@GetMapping("/logout")
+	public String logout() {
+		return "redirect:/logout";
 	}
 
 }
