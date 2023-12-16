@@ -13,7 +13,6 @@ import com.rjtechx.repo.UserRepo;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -25,13 +24,23 @@ public class UserServiceImpl implements UserService {
 
 	public User saveUser(User user) {
 
-		String password = passwordEncoder.encode(user.getPassword());
-		user.setPassword(password);
-		user.setRole("ROLE_USER");
-		user.setStatus(true);
-		User newuser = repo.save(user);
+		if (repo.count() == 0) {
+			String password = passwordEncoder.encode(user.getPassword());
+			user.setPassword(password);
+			user.setRole("ROLE_ADMIN");
+			user.setStatus(true);
+			User newuser = repo.save(user);
+			return newuser;
 
-		return newuser;
+		} else {
+			String password = passwordEncoder.encode(user.getPassword());
+			user.setPassword(password);
+			user.setRole("ROLE_USER");
+			user.setStatus(true);
+			User newuser = repo.save(user);
+			return newuser;
+		}
+
 	}
 
 	@Override
@@ -45,13 +54,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> getUsers() {
-		
+
 		return repo.findAll();
 	}
 
 	@Override
 	public void updateUser(int id, User user) {
-		
+
 		User user2 = getExistingUser(id);
 		user2.setAddress(user.getAddress());
 		user2.setCity(user.getCity());
@@ -63,14 +72,12 @@ public class UserServiceImpl implements UserService {
 		user2.setRole(user.getRole());
 		user2.setStatus(user.isStatus());
 		repo.save(user2);
-		
-		
+
 	}
 
 	@Override
 	public User getExistingUser(int id) {
 		return repo.findById(id).orElse(null);
 	}
-
 
 }
