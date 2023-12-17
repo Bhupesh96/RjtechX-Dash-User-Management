@@ -30,6 +30,7 @@ public class UserController {
 
 	@GetMapping("/view-profile")
 	public String userProfile(Principal principal, Model model) {
+		model.addAttribute("title", "RjtechX Dash - Profile");
 		User user = repo.findByEmail(principal.getName());
 		model.addAttribute("user", user);
 		return "user_profile";

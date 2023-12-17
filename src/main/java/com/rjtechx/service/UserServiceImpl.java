@@ -1,8 +1,11 @@
 package com.rjtechx.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -11,6 +14,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import com.rjtechx.entity.User;
 import com.rjtechx.repo.UserRepo;
 
+import jakarta.mail.internet.MimeMessage;
 import jakarta.servlet.http.HttpSession;
 
 @Service
@@ -22,22 +26,34 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	public User saveUser(User user) {
+	@Autowired
+	private JavaMailSender mailSender;
+
+	@Override
+	public User saveUser(User user, String url) {
 
 		if (repo.count() == 0) {
 			String password = passwordEncoder.encode(user.getPassword());
 			user.setPassword(password);
 			user.setRole("ROLE_ADMIN");
-			user.setStatus(true);
+			user.setStatus(false);
+			user.setVerification(UUID.randomUUID().toString());
 			User newuser = repo.save(user);
+			if (newuser != null) {
+				sendEmail(newuser, url);
+			}
 			return newuser;
 
 		} else {
 			String password = passwordEncoder.encode(user.getPassword());
 			user.setPassword(password);
 			user.setRole("ROLE_USER");
-			user.setStatus(true);
+			user.setStatus(false);
+			user.setVerification(UUID.randomUUID().toString());
 			User newuser = repo.save(user);
+			if (newuser != null) {
+				sendEmail(newuser, url);
+			}
 			return newuser;
 		}
 
@@ -78,6 +94,45 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getExistingUser(int id) {
 		return repo.findById(id).orElse(null);
+	}
+
+	@Override
+	public void sendEmail(User user, String url) {
+		String from = "bs.work9617@gmail.com";
+		String to = user.getEmail();
+		String subject = "Account Verfication";
+		String content = "Dear [[name]],<br>" + "Please click the link below to verify your registration:<br>"
+				+ "<h3><a href=\"[[URL]]\" target=\"_self\">Click here to verify your account</a></h3>"
+				+ "Thank you,<br>" + "RjtecX Dash";
+		try {
+			MimeMessage message = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(message);
+			helper.setFrom(from, "RjtechX Dash");
+			helper.setTo(to);
+			helper.setSubject(subject);
+			content = content.replace("[[name]]", user.getName());
+			String siteUrl = url + "/verify?code=" + user.getVerification();
+			content = content.replace("[[URL]]", siteUrl);
+			helper.setText(content, true);
+			mailSender.send(message);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public boolean verifyAccount(String verification) {
+		User user = repo.findByVerification(verification);
+		if (user == null) {
+			return false;
+		} else {
+			user.setStatus(true);
+			user.setVerification(null);
+			repo.save(user);
+			return true;
+		}
+
 	}
 
 }

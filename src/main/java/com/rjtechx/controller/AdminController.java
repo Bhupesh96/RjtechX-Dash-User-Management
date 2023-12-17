@@ -35,6 +35,7 @@ public class AdminController {
 
 	@GetMapping("/show-users")
 	public String showUsers(Model model) {
+		model.addAttribute("title", "RjtechX Dash - show-users");
 		List<User> user = repo.findAll();
 		model.addAttribute("user", user);
 		return "show_users";

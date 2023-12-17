@@ -17,6 +17,7 @@
 
 						<th:block th:if="${session.msg}">
 							<p class="text-center text-success fs-4">[[${session.msg}]]</p>
+							<span class="text-center text-danger fs-4">[[${session.msg2}]]</span>
 							<th:block th:text="${@userServiceImpl.removeSessionMessage()}"></th:block>
 
 						</th:block>

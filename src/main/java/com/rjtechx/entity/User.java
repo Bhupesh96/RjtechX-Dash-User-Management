@@ -21,6 +21,13 @@ public class User {
 	private String elctricityCustomerID;
 	private String city;
 	private boolean status;
+	private String verification;
+	public String getVerification() {
+		return verification;
+	}
+	public void setVerification(String verification) {
+		this.verification = verification;
+	}
 	public boolean isStatus() {
 		return status;
 	}
@@ -91,7 +98,8 @@ public class User {
 	public String toString() {
 		return "User [id=" + id + ", email=" + email + ", password=" + password + ", role=" + role + ", name=" + name
 				+ ", address=" + address + ", pin=" + pin + ", mobile=" + mobile + ", elctricityCustomerID="
-				+ elctricityCustomerID + ", city=" + city + ", status=" + status + "]";
+				+ elctricityCustomerID + ", city=" + city + ", status=" + status + ", verification=" + verification
+				+ "]";
 	}
 	
 	

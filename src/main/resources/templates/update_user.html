@@ -32,7 +32,7 @@
 								</div>
 								<div class="mb-3">
 									<label>Enter Email</label> <input th:value="${user.email}" type="text" name="email"
-										class="form-control">
+										class="form-control" readonly>
 								</div>
 
 								<div class="mb-3">
@@ -41,6 +41,7 @@
 								</div>
 
 								<div class="mb-3">
+									<label>Select Status</label>
 									<select class="form-select" aria-label="Default select example" name="status" th:value="${user.status}">
 										<option selected>Select status</option>
 										<option value="true" selected>Activate</option>
@@ -49,6 +50,7 @@
 								</div>
 
 								<div class="mb-3">
+									<label>Select Role</label>
 									<select class="form-select" aria-label="Default select example" name="role"
 										th:value="${user.role}">
 										<option selected>Select Role</option>
@@ -82,7 +84,7 @@
 									style="display:none;" />
 
 
-								<button class="btn btn-primary col-md-12 my-style">Register</button>
+								<button class="btn btn-primary col-md-12 my-style">Update</button>
 							</form>
 						</div>
 					</div>
