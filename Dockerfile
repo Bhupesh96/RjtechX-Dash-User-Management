@@ -1,6 +1,6 @@
 # Build Stage
 FROM maven:3.8.4-openjdk-17 AS build
-COPY pom.xml .
+COPY . .
 RUN mvn clean package
 
 # Runtime Stage
