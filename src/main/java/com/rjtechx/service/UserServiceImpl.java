@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -28,6 +29,15 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private JavaMailSender mailSender;
+	
+	@Value("${twilio.account.sid}")
+	private String accountSid;
+	
+	@Value("${twilio.auth.token}")
+	private String authToken;
+	
+	@Value("${twilio.phone.number}")
+	private String twilioNumber;
 
 	@Override
 	public User saveUser(User user, String url) {
