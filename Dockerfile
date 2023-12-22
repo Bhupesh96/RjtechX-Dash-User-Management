@@ -1,7 +1,7 @@
 # Build Stage
 FROM maven:3.8.4-openjdk-17 AS build
 COPY . .
-RUN mvn clean package -X
+RUN mvn clean package
 
 # Runtime Stage
 FROM openjdk:17-jdk-slim
